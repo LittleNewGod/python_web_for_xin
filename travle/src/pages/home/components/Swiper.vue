@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-      <swiper :options="swiperOption">
+      <swiper :options="swiperOption" v-if="showSwiper">
         <!-- slides -->
-        <swiper-slide v-for="item of swiperList" :key="item.id">
+        <swiper-slide v-for="item of list" :key="item.id">
             <img class="swiper-img" :src="item.imgUrl" />
         </swiper-slide>
         <!-- Optional controls -->
@@ -27,17 +27,25 @@ export default {
         pagination: '.swiper-pagination',
         loop: true, // 循环轮播作用
         autoplay: 3000
-      },
-      swiperList: [{
-        id: '001',
-        imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20196/e440c31af79c0b9d1a1e84c577205562.jpg_750x200_0729c45b.jpg'
-      }, {
-        id: '002',
-        imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20195/6ab65be3878a5ea365514cf3a8125fd1.jpg_750x200_7b2fe404.jpg'
-      }, {
-        id: '003',
-        imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20195/aef5f8864f5a1167599609307571b2c4.jpg_750x200_db7bedbe.jpg'
-      }]
+      }
+      // swiperList: [{
+      //   id: '001',
+      //   imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20196/e440c31af79c0b9d1a1e84c577205562.jpg_750x200_0729c45b.jpg'
+      // }, {
+      //   id: '002',
+      //   imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20195/6ab65be3878a5ea365514cf3a8125fd1.jpg_750x200_7b2fe404.jpg'
+      // }, {
+      //   id: '003',
+      //   imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20195/aef5f8864f5a1167599609307571b2c4.jpg_750x200_db7bedbe.jpg'
+      // }]
+    }
+  },
+  props: {
+    list: Array
+  },
+  computed: {
+    showSwiper () {
+      return this.list.length
     }
   }
 }
@@ -46,6 +54,7 @@ export default {
 <style lang="stylus" scoped>
  .wrapper >>> .swiper-pagination-bullet-active
    background : #fff
+   margin : 8px
  .wrapper
    background : #eee
    overflow : hidden
